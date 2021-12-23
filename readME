@@ -1,0 +1,53 @@
+Problem Statement
+There is a scenario where thousands of Mortgages applications are flowing into a bank, assume any way of transmission of Mortgages applications information. We need to create a one Mortgages applications origination engine, which stores the mortgages application in the following order
+
+MortgageId Version OfferID Product-Id   OfferDate       Created Date 	OfferExpired
+M1 			      1		  OI-1	    B1			  2023/05/09		    2021/12/23		N
+
+
+There are couples of validation, we need to provide in the above assignment
+
+1.       During transmission if the lower version is being received by the bank it will reject the mortgage application and throw an exception. If the version is same it will override the existing record.
+
+2.       Store should not allow the mortgage which has less offer date then (today date + 6 months).
+
+3.       Store should automatically update the expire flag if in a store the mortgage application crosses the offer date.
+
+What to Implement:
+
+Implement a 2 layered solution for the above problem
+o   Business layer
+o   Data Layer
+
+The business layer should expose a rest service with the methods
+o   Insert a mortgage application
+o   Retrieve all the application in a sorted manner (either by the offer date or by the created date)
+
+Also, the business layer should perform the validations listed in the problem statement
+
+The data layer should store the records in a data structure (don’t use Java/.Net Collections such as Hashmap, ArrayLists etc.)
+o   Choose a/multiple data structure(s) (Linked list, Binary Tree or an Array) to store the data
+o   Should be able to provide better performance while inserting and retrieving the data
+o   Should be able to handle Sorting the data using  the offer date or the create date.
+o   Should not maintain or store the data redundantly in the data structure objects.
+o   Don’t use a database.
+
+------------------------------------------------------------------------------------------------------------------------------------
+Server Address:
+localhost:8080
+
+Enpoints:
+Create: localhost:8080/create
+Reterive: http://localhost:8080/reterive/offerdate , http://localhost:8080/reterive/createddate
+
+Sample Input to create application:
+
+{
+		"id": "M2",
+		"version": 3,
+		"offerId": "OI-1",
+		"productId": "B6",                
+		"offerDate": "2022-07-20",
+ 		"createdDate": "2021-12-21",
+ 		"isExpired": "N"                       
+}
